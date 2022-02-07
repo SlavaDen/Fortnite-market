@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cf1382d2.css",
+    "main.js": "/static/js/main.d1c322ad.js",
+    "static/media/fortnitebattlefest.ttf": "/static/media/fortnitebattlefest.9a279d22f71f6f08e0e5.ttf",
+    "index.html": "/index.html",
+    "main.cf1382d2.css.map": "/static/css/main.cf1382d2.css.map",
+    "main.d1c322ad.js.map": "/static/js/main.d1c322ad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf1382d2.css",
+    "static/js/main.d1c322ad.js"
+  ]
+}
