@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IconButton, Badge } from "@mui/material";
 import { BsFillBasket2Fill } from "react-icons/bs";
 import s from "./index.module.css";
+import { MarketContext } from "../marketContext";
 
-const Cart = (props) => {
-  const { quantity = 0, handleBasketShow = Function.prototype } = props;
+const Cart = () => {
+  const { handleBasketShow = Function.prototype, order = {} } =
+    useContext(MarketContext);
 
   return (
     <IconButton className={s.cart} onClick={() => handleBasketShow()}>
-      <Badge badgeContent={quantity}>
+      <Badge badgeContent={order.length}>
         <BsFillBasket2Fill />
       </Badge>
     </IconButton>

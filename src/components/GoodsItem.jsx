@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Card,
@@ -8,16 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import s from "./index.module.css";
+import { MarketContext } from "../marketContext";
 
 const GoodsItem = (props) => {
-  const {
-    offerId: id,
-    displayAssets,
-    displayName: name,
-    price,
-    addToBasket = Function.prototype,
-  } = props;
+  const { offerId: id, displayAssets, displayName: name, price } = props;
 
+  const { addToBasket } = useContext(MarketContext);
+  
   return (
     <Card sx={{ height: "100%" }}>
       <CardMedia

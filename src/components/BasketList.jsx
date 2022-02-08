@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -9,16 +9,14 @@ import {
 } from "@mui/material";
 import s from "./index.module.css";
 import BasketItem from "./BasketItem";
+import { MarketContext } from "../marketContext";
 
-const BasketList = (props) => {
+const BasketList = () => {
   const {
     isBasketShow = false,
     handleBasketShow = Function.prototype,
-    removeFromBasket = Function.prototype,
-    incQuantity = Function.prototype,
-    decQuantity = Function.prototype,
     order = [],
-  } = props;
+  } = useContext(MarketContext);
 
   const totalPrice = order.reduce((acc, orderItem) => {
     return acc + orderItem.price * orderItem.quantity;
@@ -30,13 +28,7 @@ const BasketList = (props) => {
       <DialogContent>
         <List>
           {order.map((orderItem) => (
-            <BasketItem
-              key={orderItem.id}
-              orderItem={orderItem}
-              removeFromBasket={removeFromBasket}
-              incQuantity={incQuantity}
-              decQuantity={decQuantity}
-            />
+            <BasketItem key={orderItem.id} {...orderItem} />
           ))}
           <ListItem className={s.listItem}>
             <ListItemText

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Divider,
   Box,
@@ -12,21 +12,20 @@ import {
 } from "@mui/material";
 import s from "./index.module.css";
 import { AiOutlineClose, AiOutlinePlus, AiOutlineLine } from "react-icons/ai";
+import { MarketContext } from "../marketContext";
 
 const BasketItem = (props) => {
-  const {
-    orderItem = {},
-    removeFromBasket = Function.prototype,
-    incQuantity = Function.prototype,
-    decQuantity = Function.prototype,
-  } = props;
+  const { id = "", name = "", quantity = "", price = "" } = props;
+
+  const { removeFromBasket, incrementQuantity, decrementQuantity } =
+    useContext(MarketContext);
 
   return (
     <Box>
       <ListItem
         className={s.listItem}
         secondaryAction={
-          <IconButton onClick={() => removeFromBasket(orderItem.id)}>
+          <IconButton onClick={() => removeFromBasket(id)}>
             <AiOutlineClose />
           </IconButton>
         }
@@ -36,25 +35,25 @@ const BasketItem = (props) => {
             primary: s.listItemTextPrimary,
             secondary: s.listItemTextSecondary,
           }}
-          primary={`${orderItem.name}(${orderItem.quantity})`}
+          primary={`${name}(${quantity})`}
           secondary={
             <Stack direction="row" spacing={1}>
-                <Typography>{orderItem.price * orderItem.quantity}</Typography>
-                <ToggleButtonGroup exclusive size="small">
-                  <ToggleButton
-                    onClick={() => decQuantity(orderItem.id)}
-                    className={s.toggleButton}
-                  >
-                    <AiOutlineLine />
-                  </ToggleButton>
-                  <ToggleButton
-                    onClick={() => incQuantity(orderItem.id)}
-                    className={s.toggleButton}
-                  >
-                    <AiOutlinePlus />
-                  </ToggleButton>
-                </ToggleButtonGroup>
-              </Stack>
+              <Typography>{price * quantity}</Typography>
+              <ToggleButtonGroup exclusive size="small">
+                <ToggleButton
+                  onClick={() => decrementQuantity(id)}
+                  className={s.toggleButton}
+                >
+                  <AiOutlineLine />
+                </ToggleButton>
+                <ToggleButton
+                  onClick={() => incrementQuantity(id)}
+                  className={s.toggleButton}
+                >
+                  <AiOutlinePlus />
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </Stack>
           }
         />
       </ListItem>
